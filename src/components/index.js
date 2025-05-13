@@ -12,6 +12,7 @@ export { default as Reservaciones3 } from './Reservaciones3';
 export { default as Ubicacion } from './Ubicacion';
 export { default as Amenities } from './Amenities';
 export { default as Policies } from './Policies';
+export { default as Login } from './Login';
 export * from './ui/button';
 export * from './ui/card';
 export * from './ui/carousel';

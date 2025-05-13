@@ -8,14 +8,14 @@ import {
 } from '../../components/index';
 
 import Footer from '@/components/Footer';
-import Reservaciones3 from '@/components/Reservaciones3';
+import Reservaciones1 from '@/components/Reservaciones1';
 
 export default function Home() {
   return (
     <div className="bg-slate-200">
       <Navbar />
       <Departamento3 />
-      <Reservaciones3 />
+      <Reservaciones1 />
       <Footer />
     </div>
   );
