@@ -17,35 +17,23 @@ import {
 import { Input } from "@/components/ui/input";
 
 import {
-  FaWifi,
-  FaSwimmer,
-  FaTv,
-  FaParking,
-  FaShower,
-  FaFan,
-  FaBroom,
-  FaSoap,
-  FaHotTub,
-  FaBed,
-  FaToiletPaper,
-  FaChair,
+  FaWifi, FaSwimmer, FaTv, FaParking, FaShower, FaFan, FaBroom, FaSoap, FaHotTub,
+  FaBed, FaToiletPaper, FaChair
 } from "react-icons/fa";
 import {
-  MdOutlineBalcony,
-  MdOutlineKitchen,
-  MdOutlineBedroomParent,
-  MdOutlineCurtains,
-  MdIron,
+  MdOutlineBalcony, MdOutlineKitchen, MdOutlineBedroomParent,
+  MdOutlineCurtains, MdIron
 } from "react-icons/md";
 
-const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email" }),
-  name: z.string().min(2, { message: "Enter your name" }),
-  fechaInicio: z.string().min(1, { message: "Required" }),
-  fechaFin: z.string().min(1, { message: "Required" }),
-});
+// ✅ Usa un ObjectId real de MongoDB (24 caracteres hexadecimales)
+const DEPARTAMENTO_ID = "663a5e4e8b0f7c3eab8a58e4"; // ← cámbialo por el tuyo real
 
-const DEPARTAMENTO_ID = "682094cd4ff77517704e47ec";
+const formSchema = z.object({
+  email: z.string().email({ message: "Correo no válido" }),
+  name: z.string().min(2, { message: "Ingresa tu nombre" }),
+  fechaInicio: z.string().min(1, { message: "Campo requerido" }),
+  fechaFin: z.string().min(1, { message: "Campo requerido" }),
+});
 
 export default function Reservaciones1() {
   const [fechasOcupadas, setFechasOcupadas] = useState([]);
@@ -76,27 +64,29 @@ export default function Reservaciones1() {
   }, []);
 
   async function onSubmit(values) {
+    const payload = {
+      departamento: DEPARTAMENTO_ID,
+      fechaInicio: values.fechaInicio,
+      fechaFin: values.fechaFin,
+      nombre: values.name,
+      contacto: values.email,
+    };
+
+    console.log("Enviando reservación:", payload); // Debug
+
     try {
       const res = await fetch("http://localhost:8000/api/reservaciones", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          departamento: DEPARTAMENTO_ID,
-          fechaInicio: values.fechaInicio,
-          fechaFin: values.fechaFin,
-          nombre: values.name,
-          contacto: values.email,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) {
         const err = await res.json();
-        throw new Error(err.message || "Reservation error");
+        throw new Error(err.message || "Error en la reservación");
       }
 
-      alert("Reservation submitted successfully");
+      alert("Reservación enviada con éxito");
       form.reset();
     } catch (err) {
       alert("Error: " + err.message);
@@ -128,7 +118,6 @@ export default function Reservaciones1() {
 
         <hr className="my-10 border-t border-slate-400" />
         <h2 className="text-2xl font-bold text-gray-900">What this place offers</h2>
-
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-800 text-base md:text-lg">
           <p className="flex items-center gap-3"><FaWifi /> Wifi</p>
           <p className="flex items-center gap-3"><MdOutlineKitchen /> Kitchen</p>
