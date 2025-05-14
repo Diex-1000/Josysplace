@@ -60,7 +60,7 @@ export default function Reservaciones3() {
 
   async function onSubmit(values) {
     try {
-      const res = await fetch("http://localhost:8000/api/reservaciones", {
+      const res = await fetch("https://backend-admindepts.onrender.com/api/reservaciones", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -16,7 +16,7 @@ export default function Login() {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:8000/api/usuarios/login', {
+      const res = await fetch('https://backend-admindepts.onrender.com/api/usuarios/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

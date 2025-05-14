@@ -21,11 +21,11 @@ export default function RevAd() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resPendientes = await fetch("http://localhost:8000/api/reservaciones/pendientes");
+        const resPendientes = await fetch("https://backend-admindepts.onrender.com/api/reservaciones/pendientes");
         const pendientesData = await resPendientes.json();
         setPendientes(pendientesData);
 
-        const resHistorial = await fetch("http://localhost:8000/api/reservaciones");
+        const resHistorial = await fetch("https://backend-admindepts.onrender.com/api/reservaciones");
         const historialData = await resHistorial.json();
         setHistorial(historialData);
       } catch (err) {
@@ -37,7 +37,7 @@ export default function RevAd() {
 
   const actualizarEstado = async (id, estado) => {
     try {
-      await fetch(`http://localhost:8000/api/reservaciones/${id}`, {
+      await fetch(`https://backend-admindepts.onrender.com/api/reservaciones/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ estado }),
@@ -51,7 +51,7 @@ export default function RevAd() {
   const eliminarReservacion = async (id) => {
     if (!confirm("¿Estás seguro de eliminar esta reservación?")) return;
     try {
-      await fetch(`http://localhost:8000/api/reservaciones/${id}`, {
+      await fetch(`https://backend-admindepts.onrender.com/api/reservaciones/${id}`, {
         method: "DELETE",
       });
       window.location.reload();

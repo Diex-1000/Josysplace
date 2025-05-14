@@ -52,7 +52,7 @@ export default function Reservaciones1() {
   useEffect(() => {
     const cargarFechas = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/reservaciones/aceptadas/${DEPARTAMENTO_ID}`);
+        const res = await fetch(`https://backend-admindepts.onrender.com/api/reservaciones/aceptadas/${DEPARTAMENTO_ID}`);
         if (!res.ok) throw new Error("No se pudo obtener fechas ocupadas");
         const data = await res.json();
         setFechasOcupadas(data);
@@ -75,7 +75,7 @@ export default function Reservaciones1() {
     console.log("Enviando reservación:", payload); // Debug
 
     try {
-      const res = await fetch("http://localhost:8000/api/reservaciones", {
+      const res = await fetch("https://backend-admindepts.onrender.com/api/reservaciones", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
